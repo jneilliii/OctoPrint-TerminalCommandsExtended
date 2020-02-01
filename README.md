@@ -1,6 +1,18 @@
-# OctoPrint-TerminalCommandsExtended
+# Terminal Commands Extended
 
-**TODO:** Describe what your plugin does.
+This plugin adds additional command buttons to the Terminal tab of OctoPrint.
+
+## Configuration
+
+Add buttons in settings. Use drop-down on added button to choose the icon and click added button to configure specific options for that button, including the command to run and optional paramaters.
+
+## Screenshots
+
+![screenshot](screenshot_settings.png)
+
+![screenshot](screenshot_command_editor.png)
+
+![screenshot](screenshot_tab.png)
 
 ## Setup
 
@@ -9,9 +21,7 @@ or manually using this URL:
 
     https://github.com/jneilliii/OctoPrint-TerminalCommandsExtended/archive/master.zip
 
-**TODO:** Describe how to install your plugin, if more needs to be done than just installing it via pip or through
-the plugin manager.
+## Support My Efforts
+I programmed this plugin for fun and do my best effort to support those that have issues with it, please return the favor and support me.
 
-## Configuration
-
-**TODO:** Describe your plugin's configuration options (if any).
+[![paypal](https://www.paypalobjects.com/en_US/i/btn/btn_donateCC_LG.gif)](https://paypal.me/jneilliii)

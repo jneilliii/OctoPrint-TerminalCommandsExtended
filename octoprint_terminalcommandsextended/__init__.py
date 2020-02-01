@@ -2,17 +2,35 @@
 from __future__ import absolute_import
 
 import octoprint.plugin
+import flask
 
 class terminalcommandsextendedPlugin(octoprint.plugin.SettingsPlugin,
-                                               octoprint.plugin.AssetPlugin,
-                                               octoprint.plugin.TemplatePlugin):
+                                     octoprint.plugin.AssetPlugin,
+                                     octoprint.plugin.TemplatePlugin):
 
 	##~~ SettingsPlugin mixin
 
 	def get_settings_defaults(self):
 		return dict(
-			commands=[]
+			commands=[],
+			terminal_controls=[]
 		)
+
+	def get_settings_version(self):
+		return 1
+
+	def on_settings_migrate(self, target, current=None):
+		if current is None or current < 1:
+			# Loop through commands adding new fields
+			commands_new = []
+			self._logger.info(self._settings.get(['commands']))
+			for command in self._settings.get(['commands']):
+				command["confirmation"] = False
+				command["input"] = []
+				command["message"] = ""
+				commands_new.append(command)
+
+			self._settings.set(["commands"],commands_new)
 
 	##~~ AssetPlugin mixin
 

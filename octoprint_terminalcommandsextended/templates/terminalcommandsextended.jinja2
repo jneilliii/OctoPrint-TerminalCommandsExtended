@@ -1,57 +1,23 @@
 <!-- Container for custom terminal controls -->
-<div id="control-terminal-custom" style="clear: both; display: none;" data-bind="visible: loginState.isUser, template: { name: $root.displayMode, foreach: terminal_controls }"></div>
+<div id="control-terminal-custom" style="clear: both; display: none; padding-top: 10px; padding-bottom: 10px;" data-bind="visible: loginStateViewModel.isUser && settingsViewModel.settings.plugins.terminalcommandsextended.commands().length > 0, template: { name: 'customTerminalControls_controlTemplate', foreach: settingsViewModel.settings.plugins.terminalcommandsextended.commands }"></div>
 
-<!-- Templates for custom terminal controls -->
-<script type="text/html" id="customTerminalControls_containerTemplate_nameless">
-    <div class="custom_section">
-        <!-- ko template: { name: 'customTerminalControls_containerTemplate', data: $data } --><!-- /ko -->
-    </div>
-</script>
-<script type="text/html" id="customTerminalControls_containerTemplate_collapsable">
-    <div class="custom_section">
-        <h1 data-bind="toggleContent: { class: 'fa-caret-right fa-caret-down', parent: '.custom_section', container: '> div' }"><i class="fa" data-bind="css: {'fa-caret-down': !collapsed, 'fa-caret-right': collapsed}"></i> <span data-bind="text: name"></span></h1>
-        <!-- ko template: { name: 'customTerminalControls_containerTemplate', data: $data } --><!-- /ko -->
-    </div>
-</script>
-<script type="text/html" id="customTerminalControls_containerTemplate">
-    <!-- ko if: layout == 'vertical' -->
-    <div class="custom_section_vertical" data-bind="template: { name: $root.displayMode, foreach: children }, css: {hide: collapsed && name}"></div>
-    <!-- /ko -->
-
-    <!-- ko if: layout == 'horizontal' -->
-    <div class="custom_section_horizontal" data-bind="template: { name: $root.displayMode, foreach: children }, css: {hide: collapsed && name}"></div>
-    <!-- /ko -->
-
-    <!-- ko if: layout == 'horizontal_grid' -->
-    <div class="row-fluid custom_section_horizontal_grid" data-bind="css: {hide: collapsed && name}">
-        <!-- ko foreach: children -->
-        <div data-bind="template: { name: $root.displayMode }, css: $root.rowCss($data)"></div>
-        <!-- /ko -->
-    </div>
-    <!-- /ko -->
-</script>
+<!-- Template for custom terminal controls -->
 <script type="text/html" id="customTerminalControls_controlTemplate">
-    <form class="form-inline custom_control">
-        <!-- ko template: { name: 'customTerminalControls_controlTemplate_input', data: $data, if: $data.hasOwnProperty('input') } --><!-- /ko -->
-        <!-- ko template: { name: 'customTerminalControls_controlTemplate_command', data: $data, if: $data.hasOwnProperty('command') || $data.hasOwnProperty('commands') || $data.hasOwnProperty('script') || $data.hasOwnProperty('javascript') } --><!-- /ko -->
-        <!-- ko template: { name: 'customTerminalControls_controlTemplate_output', data: $data, if: $data.hasOwnProperty('output') } --><!-- /ko -->
-    </form>
+	<!-- ko template: { name: 'customTerminalControls_controlTemplate_input', data: $data, if: $data.command().length > 0 } --><!-- /ko -->
 </script>
+
+<!-- Template for inputs -->
 <script type="text/html" id="customTerminalControls_controlTemplate_input">
-    <!-- ko foreach: input -->
-        <label style="cursor: default" data-bind="text: name"></label>
-        <!-- ko if: slider -->
-            <input type="number" style="width: 100px" data-bind="slider: {value: value, min: slider.min, max: slider.max, step: slider.step}">
-        <!-- /ko -->
-        <!-- ko ifnot: slider -->
-            <input type="text" class="input-small" data-bind="attr: {placeholder: name}, value: value">
-        <!-- /ko -->
-    <!-- /ko -->
+	<div class="btn-group" style="display: inline-block; margin-left: 0px; margin-bottom: 5px;">
+	<!-- ko foreach: input -->
+		<button style="cursor: default" data-bind="text: label, enable: $root.controlViewModel.isOperational() && !$root.controlViewModel.isPrinting()" class="btn"></button>
+		<input type="text" class="input-mini btn active" style="cursor: text;margin-bottom: 0px;" data-bind="attr: {placeholder: label, title: value}, value: value, enable: $root.controlViewModel.isOperational() && !$root.controlViewModel.isPrinting()">
+	<!-- /ko -->
+		<!-- ko template: { name: 'customTerminalControls_controlTemplate_command', data: $data} --><!-- /ko -->
+	</div>
 </script>
-<script type="text/html" id="customTerminalControls_controlTemplate_output">
-    <label style="cursor: default" data-bind="text: output"></label>
-</script>
+
+<!-- Template for button -->
 <script type="text/html" id="customTerminalControls_controlTemplate_command">
-    <button class="btn" data-bind="text: name, css: additionalClasses, enable: $root.isCustomEnabled($data), click: function() { $root.clickCustom($data) }"></button>
+	<button class="btn" data-bind="click: $root.runCustomCommand, attr: {title: (tooltip() ? tooltip : command)}, enable: $root.controlViewModel.isOperational() && !$root.controlViewModel.isPrinting()"><i data-bind="css: icon"></i> <span data-bind="text: label"/></button>
 </script>
-<!-- End of templates for custom controls -->
