@@ -26,7 +26,9 @@ $(function() {
 		};
 
 		self.addCommand = function() {
-			self.settingsViewModel.settings.plugins.terminalcommandsextended.commands.push({icon: ko.observable('fas fa-gear'), label: ko.observable(''), tooltip: ko.observable(''), command: ko.observable(''), confirmation: ko.observable(false), message: ko.observable(''), input: ko.observableArray([])});
+			self.selected_command({icon: ko.observable('fas fa-gear'), label: ko.observable(''), tooltip: ko.observable(''), command: ko.observable(''), confirmation: ko.observable(false), message: ko.observable(''), input: ko.observableArray([])});
+			self.settingsViewModel.settings.plugins.terminalcommandsextended.commands.push(self.selected_command());
+			$('#terminalCommandEditor').modal('show');
 		};
 
 		self.copyCommand = function(data) {

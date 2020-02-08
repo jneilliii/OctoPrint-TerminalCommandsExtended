@@ -44,7 +44,7 @@ class terminalcommandsextendedPlugin(octoprint.plugin.SettingsPlugin,
 	def get_assets(self):
 		return dict(
 			js=["js/jquery-ui.min.js","js/knockout-sortable.js","js/fontawesome-iconpicker.js","js/ko.iconpicker.js","js/terminalcommandsextended.js"],
-			css=["css/font-awesome.min.css","css/font-awesome-v4-shims.min.css","css/fontawesome-iconpicker.css"]
+			css=["css/font-awesome.min.css","css/font-awesome-v4-shims.min.css","css/fontawesome-iconpicker.css","css/terminalcommandsextended.css"]
 		)
 
 	##~~ Softwareupdate hook
