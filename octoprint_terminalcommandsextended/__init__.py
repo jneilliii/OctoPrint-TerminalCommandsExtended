@@ -17,7 +17,7 @@ class terminalcommandsextendedPlugin(octoprint.plugin.SettingsPlugin,
 		)
 
 	def get_settings_version(self):
-		return 2
+		return 3
 
 	def on_settings_migrate(self, target, current=None):
 		if current is None or current < 1:
@@ -36,6 +36,14 @@ class terminalcommandsextendedPlugin(octoprint.plugin.SettingsPlugin,
 			for command in self._settings.get(['commands']):
 				if not command.get("command", False):
 					command["command"] = ""
+				commands_new.append(command)
+			self._settings.set(["commands"],commands_new)
+
+		if current == 2:
+			commands_new = []
+			for command in self._settings.get(['commands']):
+				if not command.get("enabled_while_printing", False):
+					command["enabled_while_printing"] = False
 				commands_new.append(command)
 			self._settings.set(["commands"],commands_new)
 

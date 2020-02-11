@@ -29,6 +29,7 @@
 		<div class="controls"><label class="control-label">{{ _('Icon') }}</label><input type="text" class="input-block-level" data-bind="value: icon, iconpicker: icon,iconpickerOptions: {hideOnSelect: true, collision: true}"/></div>
 		<div class="controls"><label class="control-label">{{ _('Label') }}</label><input type="text" class="input-block-level" data-bind="value: label"/></div>
 		<div class="controls"><label class="control-label">{{ _('Tooltip') }}</label><input type="text" class="input-block-level" data-bind="value: tooltip"/></div>
+		<div class="controls"><label class="checkbox">{{ _('Enabled While Printing') }}<input type="checkbox" data-bind="checked: enabled_while_printing" title="Prompt for Confirmation"/></label></div>
 		<div class="controls"><label class="checkbox">{{ _('Confirm') }}<input type="checkbox" data-bind="checked: confirmation" title="Prompt for Confirmation"/></label></div>
 		<!-- ko if: confirmation -->
 		<div class="controls"><label class="control-label">{{ _('Message') }}</label><input type="text" class="input-block-level" data-bind="value: message"/></div>

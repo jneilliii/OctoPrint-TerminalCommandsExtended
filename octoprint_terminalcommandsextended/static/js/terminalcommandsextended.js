@@ -26,7 +26,14 @@ $(function() {
 		};
 
 		self.addCommand = function() {
-			self.selected_command({icon: ko.observable('fas fa-gear'), label: ko.observable(''), tooltip: ko.observable(''), command: ko.observable(''), confirmation: ko.observable(false), message: ko.observable(''), input: ko.observableArray([])});
+			self.selected_command({icon: ko.observable('fas fa-gear'), 
+									label: ko.observable(''), 
+									tooltip: ko.observable(''), 
+									command: ko.observable(''), 
+									confirmation: ko.observable(false), 
+									message: ko.observable(''), 
+									input: ko.observableArray([]),
+									enabled_while_printing: ko.observable(false)});
 			self.settingsViewModel.settings.plugins.terminalcommandsextended.commands.push(self.selected_command());
 			$('#terminalCommandEditor').modal('show');
 		};
@@ -38,7 +45,8 @@ $(function() {
 																							command: ko.observable(data.command()),
 																							confirmation: ko.observable(data.confirmation()),
 																							message: ko.observable(data.message()),
-																							input: ko.observableArray(data.input())});
+																							input: ko.observableArray(data.input()),
+																							enabled_while_printing: ko.observable(data.enabled_while_printing())});
 		};
 
 		self.removeCommand = function(data) {
