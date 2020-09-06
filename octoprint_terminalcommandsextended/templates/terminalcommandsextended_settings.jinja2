@@ -1,22 +1,22 @@
 <h4>Buttons to Add to Terminal Tab</h4>
 <div id="terminalcommandsextended_custom_commands" class="row-fluid">
 	<div class="row-fluid">
-		<div class="span10">Click on button to configure options.</div>
-		<div class="span2" style="text-align: center;"><button class="btn btn-mini" data-bind="click: addCommand" title="Add custom command button"><i class="fa fa-plus"></i> Add</button></div>
+		<div class="span8">Click on button to configure options.</div>
+		<div class="span4" style="text-align: center;"><button class="btn btn-mini" data-bind="click: addCommand" title="Add custom command button"><i class="fa fa-plus"></i> Add Button</button><button class="btn btn-mini" data-bind="click: addBreak" title="Add Line Break"><i class="fa fa-plus"></i> Add Break</button></div>
 	</div>
-	<div data-bind="sortable: { data: settingsViewModel.settings.plugins.terminalcommandsextended.commands, options: { cancel: '.unsortable', handle: '.move_command'} }" class="row-fluid">
-			<div class="btn-group" style="margin: 5px;">
-				<button type="button" class="btn" data-bind="click: $root.showEditor, attr: {title: (tooltip() ? tooltip : command)}"><i class="fa-lg" data-bind="css: icon"></i> <span data-bind="text: label"></span></button>
-				<button type="button" class="btn btn-mini move_command" title="Move button">
-					<i class="fa fa-arrows"></i>
-				</button>
-				<button type="button" class="btn btn-mini copy_command" data-bind="click: $parent.copyCommand" title="Copy button">
-					<i class="fa fa-copy"></i>
-				</button>
-				<button type="button" class="btn btn-mini btn-danger removeJob" data-bind="click: $parent.removeCommand" title="Delete button">
-					<i class="fa fa-times"></i>
-				</button>
-			</div>
+	<div data-bind="sortable: { data: settingsViewModel.settings.plugins.terminalcommandsextended.commands, options: { cancel: '.unsortable', handle: '.move_command', containment: 'parent'} }" class="row-fluid">
+        <div class="btn-group" style="margin: 5px;" data-bind="css: {'row-fluid': label() === '<BR>'}">
+            <button type="button" class="btn" data-bind="visible: label() !== '<BR>', click: $root.showEditor, attr: {title: (tooltip() ? tooltip : command)}"><i class="fa-lg" data-bind="css: icon"></i> <span data-bind="text: label"></span></button>
+            <button type="button" class="btn btn-mini move_command" title="Move button">
+                <i class="fa fa-arrows"></i>
+            </button>
+            <button type="button" class="btn btn-mini copy_command" data-bind="click: $parent.copyCommand" title="Copy button">
+                <i class="fa fa-copy"></i>
+            </button>
+            <button type="button" class="btn btn-mini btn-danger removeJob" data-bind="click: $parent.removeCommand" title="Delete button">
+                <i class="fa fa-times"></i>
+            </button>
+        </div>
 	</div>
 </div>
 

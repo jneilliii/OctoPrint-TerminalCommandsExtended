@@ -38,6 +38,17 @@ $(function() {
 			$('#terminalCommandEditor').modal('show');
 		};
 
+		self.addBreak = function() {
+			self.selected_command({icon: ko.observable('fas fa-gear'),
+									label: ko.observable('<BR>'),
+									tooltip: ko.observable(''),
+									command: ko.observable(''),
+									confirmation: ko.observable(false),
+									message: ko.observable(''),
+									input: ko.observableArray([]),
+									enabled_while_printing: ko.observable(false)});
+			self.settingsViewModel.settings.plugins.terminalcommandsextended.commands.push(self.selected_command());
+		};
 		self.copyCommand = function(data) {
 			self.settingsViewModel.settings.plugins.terminalcommandsextended.commands.push({icon: ko.observable(data.icon()),
 																							label: ko.observable(data.label()),
