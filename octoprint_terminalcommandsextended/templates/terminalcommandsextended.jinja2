@@ -3,18 +3,23 @@
 
 <!-- Template for custom terminal controls -->
 <script type="text/html" id="customTerminalControls_controlTemplate">
+    <!-- ko if: $data.label() === "<BR>" -->
+		<br>
+	<!-- /ko -->
+    <!-- ko ifnot: $data.label() === "<BR>" -->
 	<!-- ko template: { name: 'customTerminalControls_controlTemplate_input', data: $data, if: $data.command().length > 0 } --><!-- /ko -->
+	<!-- /ko -->
 </script>
 
 <!-- Template for inputs -->
 <script type="text/html" id="customTerminalControls_controlTemplate_input">
-	<div class="btn-group" style="display: inline-block; margin-left: 0px; margin-bottom: 5px;">
-	<!-- ko foreach: input -->
-		<button style="cursor: default" data-bind="text: label, enable: $root.controlViewModel.isOperational() && (!$root.controlViewModel.isPrinting() || enabled_while_printing())" class="btn"></button>
-		<input type="text" class="input-mini btn active" style="cursor: text;margin-bottom: 0px;" data-bind="attr: {placeholder: label, title: value, type: (isNaN(value()) || value() == '') ? 'text' : 'number'}, value: value, enable: $root.controlViewModel.isOperational() && !$root.controlViewModel.isPrinting()">
-	<!-- /ko -->
-		<!-- ko template: { name: 'customTerminalControls_controlTemplate_command', data: $data} --><!-- /ko -->
-	</div>
+    <div class="btn-group" style="display: inline-block; margin-left: 0px; margin-bottom: 5px;">
+        <!-- ko foreach: input -->
+            <button style="cursor: default" data-bind="text: label, enable: $root.controlViewModel.isOperational() && (!$root.controlViewModel.isPrinting() || enabled_while_printing())" class="btn"></button>
+            <input type="text" class="input-mini btn active" style="cursor: text;margin-bottom: 0px;" data-bind="attr: {placeholder: label, title: value, type: (isNaN(value()) || value() == '') ? 'text' : 'number'}, value: value, enable: $root.controlViewModel.isOperational() && !$root.controlViewModel.isPrinting()">
+        <!-- /ko -->
+        <!-- ko template: { name: 'customTerminalControls_controlTemplate_command', data: $data} --><!-- /ko -->
+    </div>
 </script>
 
 <!-- Template for button -->
