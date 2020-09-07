@@ -11,11 +11,25 @@ $(function() {
 		self.loginStateViewModel = parameters[0];
 		self.settingsViewModel = parameters[1];
 		self.controlViewModel = parameters[2];
+		self.terminalViewModel = parameters[3];
 
 		self.selected_command = ko.observable();
 
 		self.onBeforeBinding = function(){
 			$('#control-terminal-custom').appendTo('#term');
+			self.multidimensional_array = ko.computed(function(){
+				let matrix = [[]], column_counter = 0, row_counter = 0;
+				ko.utils.arrayForEach(self.settingsViewModel.settings.plugins.terminalcommandsextended.commands(), function(item) {
+					column_counter += (parseInt(item.width()) + parseInt(item.offset()));
+					if (column_counter > 12) {
+						row_counter++;
+						column_counter = parseInt(item.width()) + parseInt(item.offset());
+						matrix[row_counter] = [];
+					}
+					matrix[row_counter].push(item);
+				});
+				return matrix;
+			});
 		};
 
 		// Custom command list functions
@@ -28,7 +42,9 @@ $(function() {
 		self.addCommand = function() {
 			self.selected_command({icon: ko.observable('fas fa-gear'), 
 									label: ko.observable(''), 
-									tooltip: ko.observable(''), 
+									tooltip: ko.observable(''),
+									width: ko.observable(3),
+									offset: ko.observable(0),
 									command: ko.observable(''), 
 									confirmation: ko.observable(false), 
 									message: ko.observable(''), 
@@ -42,6 +58,8 @@ $(function() {
 			self.selected_command({icon: ko.observable('fas fa-gear'),
 									label: ko.observable('<BR>'),
 									tooltip: ko.observable(''),
+									width: ko.observable(12),
+									offset: ko.observable(0),
 									command: ko.observable(''),
 									confirmation: ko.observable(false),
 									message: ko.observable(''),
@@ -54,6 +72,8 @@ $(function() {
 																							label: ko.observable(data.label()),
 																							tooltip: ko.observable(data.tooltip()),
 																							command: ko.observable(data.command()),
+																							width: ko.observable(data.width()),
+																							offset: ko.observable(data.offset()),
 																							confirmation: ko.observable(data.confirmation()),
 																							message: ko.observable(data.message()),
 																							input: ko.observableArray(data.input()),
@@ -116,7 +136,7 @@ $(function() {
 
 	OCTOPRINT_VIEWMODELS.push({
 		construct: terminalcommandsextendedViewModel,
-		dependencies: ["loginStateViewModel", "settingsViewModel","controlViewModel"],
+		dependencies: ["loginStateViewModel", "settingsViewModel","controlViewModel","terminalViewModel"],
 		elements: ["#control-terminal-custom","#terminalcommandsextended","#settings_plugin_terminalcommandsextended"]
 	});
 });

@@ -17,7 +17,7 @@ class terminalcommandsextendedPlugin(octoprint.plugin.SettingsPlugin,
 		)
 
 	def get_settings_version(self):
-		return 3
+		return 4
 
 	def on_settings_migrate(self, target, current=None):
 		if current is None or current < 1:
@@ -29,7 +29,7 @@ class terminalcommandsextendedPlugin(octoprint.plugin.SettingsPlugin,
 				command["input"] = []
 				command["message"] = ""
 				commands_new.append(command)
-			self._settings.set(["commands"],commands_new)
+			self._settings.set(["commands"], commands_new)
 
 		if current == 1:
 			commands_new = []
@@ -37,7 +37,7 @@ class terminalcommandsextendedPlugin(octoprint.plugin.SettingsPlugin,
 				if not command.get("command", False):
 					command["command"] = ""
 				commands_new.append(command)
-			self._settings.set(["commands"],commands_new)
+			self._settings.set(["commands"], commands_new)
 
 		if current == 2:
 			commands_new = []
@@ -45,7 +45,17 @@ class terminalcommandsextendedPlugin(octoprint.plugin.SettingsPlugin,
 				if not command.get("enabled_while_printing", False):
 					command["enabled_while_printing"] = False
 				commands_new.append(command)
-			self._settings.set(["commands"],commands_new)
+			self._settings.set(["commands"], commands_new)
+
+		if current <= 3:
+			commands_new = []
+			for command in self._settings.get(['commands']):
+				if not command.get("width", False):
+					command["width"] = 2
+				if not command.get("offset", False):
+					command["offset"] = 0
+				commands_new.append(command)
+			self._settings.set(["commands"], commands_new)
 
 	##~~ AssetPlugin mixin
 
