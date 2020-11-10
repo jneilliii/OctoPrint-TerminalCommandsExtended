@@ -14,7 +14,7 @@ plugin_package = "octoprint_terminalcommandsextended"
 plugin_name = "Terminal Commands Extended"
 
 # The plugin's version. Can be overwritten within OctoPrint's internal data via __plugin_version__ in the plugin module
-plugin_version = "0.1.5"
+plugin_version = "0.1.6rc1"
 
 # The plugin's description. Can be overwritten within OctoPrint's internal data via __plugin_description__ in the plugin
 # module
