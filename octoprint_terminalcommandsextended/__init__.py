@@ -17,7 +17,7 @@ class terminalcommandsextendedPlugin(octoprint.plugin.SettingsPlugin,
 		)
 
 	def get_settings_version(self):
-		return 3
+		return 4
 
 	def on_settings_migrate(self, target, current=None):
 		if current is None or current < 1:
@@ -29,7 +29,7 @@ class terminalcommandsextendedPlugin(octoprint.plugin.SettingsPlugin,
 				command["input"] = []
 				command["message"] = ""
 				commands_new.append(command)
-			self._settings.set(["commands"],commands_new)
+			self._settings.set(["commands"], commands_new)
 
 		if current == 1:
 			commands_new = []
@@ -37,7 +37,7 @@ class terminalcommandsextendedPlugin(octoprint.plugin.SettingsPlugin,
 				if not command.get("command", False):
 					command["command"] = ""
 				commands_new.append(command)
-			self._settings.set(["commands"],commands_new)
+			self._settings.set(["commands"], commands_new)
 
 		if current == 2:
 			commands_new = []
@@ -45,13 +45,23 @@ class terminalcommandsextendedPlugin(octoprint.plugin.SettingsPlugin,
 				if not command.get("enabled_while_printing", False):
 					command["enabled_while_printing"] = False
 				commands_new.append(command)
-			self._settings.set(["commands"],commands_new)
+			self._settings.set(["commands"], commands_new)
+
+		if current <= 3:
+			commands_new = []
+			for command in self._settings.get(['commands']):
+				if not command.get("width", False):
+					command["width"] = 2
+				if not command.get("offset", False):
+					command["offset"] = 0
+				commands_new.append(command)
+			self._settings.set(["commands"], commands_new)
 
 	##~~ AssetPlugin mixin
 
 	def get_assets(self):
 		return dict(
-			js=["js/jquery-ui.min.js","js/knockout-sortable.js","js/fontawesome-iconpicker.js","js/ko.iconpicker.js","js/terminalcommandsextended.js"],
+			js=["js/jquery-ui.min.js","js/knockout-sortable.1.2.0.js","js/fontawesome-iconpicker.js","js/ko.iconpicker.js","js/terminalcommandsextended.js"],
 			css=["css/font-awesome.min.css","css/font-awesome-v4-shims.min.css","css/fontawesome-iconpicker.css","css/terminalcommandsextended.css"]
 		)
 
@@ -68,6 +78,16 @@ class terminalcommandsextendedPlugin(octoprint.plugin.SettingsPlugin,
 				user="jneilliii",
 				repo="OctoPrint-TerminalCommandsExtended",
 				current=self._plugin_version,
+				stable_branch=dict(
+					name="Stable", branch="master", comittish=["master"]
+				),
+				prerelease_branches=[
+					dict(
+						name="Release Candidate",
+						branch="rc",
+						comittish=["rc", "master"],
+					)
+				],
 
 				# update method: pip
 				pip="https://github.com/jneilliii/OctoPrint-TerminalCommandsExtended/archive/{target_version}.zip"
