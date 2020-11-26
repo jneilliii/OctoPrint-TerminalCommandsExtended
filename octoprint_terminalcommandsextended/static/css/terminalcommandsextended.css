@@ -13,3 +13,7 @@
 	-moz-border-radius-bottomright: 4px;
 	-moz-border-radius-topright: 4px;
 }
+
+#control-terminal-custom .btn {
+	width: 100%;
+}

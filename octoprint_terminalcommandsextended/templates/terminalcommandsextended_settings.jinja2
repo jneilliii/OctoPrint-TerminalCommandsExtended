@@ -4,24 +4,20 @@
 		<div class="span8">Click on button to configure options.</div>
 		<div class="span4" style="text-align: center;"><button class="btn btn-mini" data-bind="click: addCommand" title="Add custom command button"><i class="fa fa-plus"></i> Add Button</button><button class="btn btn-mini" data-bind="click: addBreak" title="Add Line Break"><i class="fa fa-plus"></i> Add Break</button></div>
 	</div>
-{#    <div class="row-fluid" data-bind="foreach: multidimensional_array">#}
-        <div class="row-fluid" data-bind="sortable: { data: settingsViewModel.settings.plugins.terminalcommandsextended.commands, options: { cancel: '.unsortable', handle: '.move_command'} }">
-            <div data-bind="css: [((offset() > 0) ? 'offset'+offset() : ''), ((label() === '<BR>') ? 'row-fluid': 'span'+width())].join(' ')">
-                <div style="margin-bottom: 5px; margin-left: 0;" data-bind="css: ['btn-group', ((offset() > 0) ? 'offset'+offset() : ''), ((label() === '<BR>') ? 'row-fluid': 'span'+width())].join(' ')">
-                    <button type="button" class="btn" data-bind="visible: label() !== '<BR>', click: $root.showEditor, attr: {title: (tooltip() ? tooltip : command)}"><i class="fa-lg" data-bind="css: icon"></i> <span data-bind="text: label"></span></button>
-                    <button type="button" class="btn btn-mini move_command" title="Move button">
-                        <i class="fa fa-arrows"></i>
-                    </button>
-                    <button type="button" class="btn btn-mini copy_command" data-bind="click: $root.copyCommand" title="Copy button">
-                        <i class="fa fa-copy"></i>
-                    </button>
-                    <button type="button" class="btn btn-mini btn-danger removeJob" data-bind="click: $root.removeCommand" title="Delete button">
-                        <i class="fa fa-times"></i>
-                    </button>
-                </div>
-            </div>
+    <div class="row-fluid" data-bind="sortable: { data: settingsViewModel.settings.plugins.terminalcommandsextended.commands, options: { cancel: '.unsortable', handle: '.move_command'} }">
+        <div style="margin-bottom: 5px; margin-left: 0;" data-bind="css: ['btn-group', ((offset() > 0) ? 'offset'+offset() : ''), ((label() === '<BR>') ? 'row-fluid': 'span'+width())].join(' ')">
+            <button type="button" class="btn" data-bind="visible: label() !== '<BR>', click: $root.showEditor, attr: {title: (tooltip() ? tooltip : command)}"><i class="fa-lg" data-bind="css: icon"></i> <span data-bind="text: label"></span></button>
+            <button type="button" class="btn btn-mini move_command" title="Move button">
+                <i class="fa fa-arrows"></i>
+            </button>
+            <button type="button" class="btn btn-mini copy_command" data-bind="click: $root.copyCommand" title="Copy button">
+                <i class="fa fa-copy"></i>
+            </button>
+            <button type="button" class="btn btn-mini btn-danger removeJob" data-bind="click: $root.removeCommand" title="Delete button">
+                <i class="fa fa-times"></i>
+            </button>
         </div>
-{#    </div>#}
+    </div>
 </div>
 
 <div id="terminalCommandEditor" data-bind="with: selected_command" class="modal hide fade">
