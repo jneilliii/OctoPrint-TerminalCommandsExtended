@@ -31,7 +31,7 @@ class terminalcommandsextendedPlugin(octoprint.plugin.SettingsPlugin,
 				commands_new.append(command)
 			self._settings.set(["commands"], commands_new)
 
-		if current == 1:
+		elif current == 1:
 			commands_new = []
 			for command in self._settings.get(['commands']):
 				if not command.get("command", False):
@@ -39,7 +39,7 @@ class terminalcommandsextendedPlugin(octoprint.plugin.SettingsPlugin,
 				commands_new.append(command)
 			self._settings.set(["commands"], commands_new)
 
-		if current == 2:
+		elif current == 2:
 			commands_new = []
 			for command in self._settings.get(['commands']):
 				if not command.get("enabled_while_printing", False):
@@ -47,7 +47,7 @@ class terminalcommandsextendedPlugin(octoprint.plugin.SettingsPlugin,
 				commands_new.append(command)
 			self._settings.set(["commands"], commands_new)
 
-		if current <= 3:
+		elif current <= 3:
 			commands_new = []
 			for command in self._settings.get(['commands']):
 				if not command.get("width", False):
