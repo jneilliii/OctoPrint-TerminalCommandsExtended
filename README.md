@@ -43,7 +43,8 @@ If you experience issues with this plugin or need assistance please use the issu
 
 Check out my other plugins [here](https://plugins.octoprint.org/by_author/#jneilliii)
 
-### Sponsors- Andreas Lindermayr
+### Sponsors
+- Andreas Lindermayr
 - [@Mearman](https://github.com/Mearman)
 - [@TheTuxKeeper](https://github.com/thetuxkeeper)
 - [@tideline3d](https://github.com/tideline3d/)
