@@ -18,6 +18,9 @@
             </button>
         </div>
     </div>
+    <div class="row-fluid">
+        <div class="controls"><label class="checkbox">{{ _('Move Terminal Filters Under Advanced options') }}<input type="checkbox" data-bind="checked: settingsViewModel.settings.plugins.terminalcommandsextended.move_filters" title="Prompt for Confirmation"/></label></div>
+    </div>
 </div>
 
 <div id="terminalCommandEditor" data-bind="with: selected_command" class="modal hide fade">

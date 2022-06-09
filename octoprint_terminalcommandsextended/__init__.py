@@ -2,7 +2,6 @@
 from __future__ import absolute_import
 
 import octoprint.plugin
-import flask
 from octoprint.util.version import is_octoprint_compatible
 
 
@@ -13,10 +12,7 @@ class terminalcommandsextendedPlugin(octoprint.plugin.SettingsPlugin,
     ##~~ SettingsPlugin mixin
 
     def get_settings_defaults(self):
-        return dict(
-            commands=[],
-            terminal_controls=[]
-        )
+        return {'commands': [], 'terminal_controls': [], 'move_filters': False}
 
     def get_settings_version(self):
         return 4
@@ -77,31 +73,18 @@ class terminalcommandsextendedPlugin(octoprint.plugin.SettingsPlugin,
     ##~~ Softwareupdate hook
 
     def get_update_information(self):
-        return dict(
-            terminalcommandsextended=dict(
-                displayName="Terminal Commands Extended",
-                displayVersion=self._plugin_version,
-
-                # version check: github repository
-                type="github_release",
-                user="jneilliii",
-                repo="OctoPrint-TerminalCommandsExtended",
-                current=self._plugin_version,
-                stable_branch=dict(
-                    name="Stable", branch="master", comittish=["master"]
-                ),
-                prerelease_branches=[
-                    dict(
-                        name="Release Candidate",
-                        branch="rc",
-                        comittish=["rc", "master"],
-                    )
-                ],
-
-                # update method: pip
-                pip="https://github.com/jneilliii/OctoPrint-TerminalCommandsExtended/archive/{target_version}.zip"
-            )
-        )
+        return {'terminalcommandsextended': {'displayName': "Terminal Commands Extended",
+                                             'displayVersion': self._plugin_version, 'type': "github_release",
+                                             'user': "jneilliii", 'repo': "OctoPrint-TerminalCommandsExtended",
+                                             'current': self._plugin_version, 'stable_branch': {'name': "Stable",
+                                                                                                'branch': "master",
+                                                                                                'comittish': [
+                                                                                                    "master"]},
+                                             'prerelease_branches': [
+                                                 {'name': "Release Candidate", 'branch': "rc",
+                                                  'comittish': ["rc", "master"]}
+                                             ],
+                                             'pip': "https://github.com/jneilliii/OctoPrint-TerminalCommandsExtended/archive/{target_version}.zip"}}
 
 
 __plugin_name__ = "Terminal Commands Extended"

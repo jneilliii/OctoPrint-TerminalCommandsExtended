@@ -32,6 +32,12 @@ $(function() {
 			});
 		};
 
+		self.onAfterBinding = function() {
+			if(self.settingsViewModel.settings.plugins.terminalcommandsextended.move_filters()){
+				$('#terminal-filterpanel').parent().prependTo('#term > div:nth-child(3) > div:nth-child(2)');
+			}
+		};
+
 		// Custom command list functions
 
 		self.showEditor = function(data) {
