@@ -34,7 +34,13 @@ $(function() {
 
 		self.onAfterBinding = function() {
 			if(self.settingsViewModel.settings.plugins.terminalcommandsextended.move_filters()){
-				$('#terminal-filterpanel').parent().prependTo('#term > div:nth-child(3) > div:nth-child(2)');
+				if(VERSION.split(".")[0] == 1 && VERSION.split(".")[1] < 10){
+					$('#terminal-filterpanel').parent().prependTo('#term > div:nth-child(3) > div:nth-child(2)');
+				} else if(VERSION.split(".")[0] == 1 && VERSION.split(".")[1] >= 10){
+					$('#terminal-filterpanel').parent().prependTo('#term > div:nth-child(4) > div.hide');
+				} else {
+					console.log("unknown version compatibility for moving filters into advanced panel")
+				}
 			}
 		};
 
