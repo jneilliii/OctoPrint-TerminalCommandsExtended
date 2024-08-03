@@ -11,7 +11,7 @@
 
 <!-- Template for inputs -->
 <script type="text/html" id="customTerminalControls_controlTemplate_input">
-    <div data-bind="css: [((offset() > 0) ? 'offset'+offset() : ''), ((label() === '<BR>') ? 'row-fluid': 'span'+width())].join(' ')">
+    <div data-bind="css: [((offset() > 0) ? 'offset'+offset() : ''), ((label() === '<BR>') ? 'row-fluid': 'span'+width()), ((input().length > 0) ? 'input-append input-prepend' : '')].join(' ')">
         <!-- ko foreach: input -->
             <button style="cursor: default" data-bind="text: label, enable: $root.controlViewModel.isOperational() && (!$root.controlViewModel.isPrinting() || enabled_while_printing())" class="btn"></button>
             <input type="text" class="input-mini btn active" style="cursor: text;margin-bottom: 0px;" data-bind="attr: {placeholder: label, title: value, type: (isNaN(value()) || value() == '') ? 'text' : 'number'}, value: value, enable: $root.controlViewModel.isOperational() && !$root.controlViewModel.isPrinting()">
