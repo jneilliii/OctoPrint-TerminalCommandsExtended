@@ -27,4 +27,4 @@ jobs:
     permissions:
       actions: write
     steps:
-    - uses: jneilliii/gh-workflow-keepalive@v1
+    - uses: jneilliii/gh-workflow-keepalive@v1.2.1
